@@ -8,7 +8,7 @@
             </div>
             <div class="form-group">
                 <label class="form-label">Cantidad</label>
-                <input type="text" class="form-control" :value="record.amount" @input="handleInputAmout" @focus="handleInputAmoutFocus">
+                <input type="number" class="form-control" v-model="record.amount" @focus="handleInputAmoutFocus">
             </div>
 
             <tags :tags="savedTags" :selected-tags="record.tags" :tag-added="handleTagAdded" :tag-removed="handleTagRemoved"></tags>
@@ -18,7 +18,6 @@
 </template>
 <script>
 import Tags from '@/components/Tags';
-import numeral from 'numeral';
 
 import {
     mapGetters,
@@ -58,8 +57,8 @@ export default {
             this.record = newRecord();
         },
         handleSubmit() {
-            this.record.date = Date.now();
-            this.record.amount = parseInt(numeral(this.record.amount).format('0'), 10);
+            this.record.date = new Date().toISOString();
+            this.record.amount = parseInt(this.record.amount, 10);
             this.addRecord(this.record);
             this.resetForm();
         },
