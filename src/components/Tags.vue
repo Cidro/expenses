@@ -4,11 +4,13 @@
             <span class="label label-default" v-for="t in selectedTags" @click="removeTag(t)">{{ t }}</span>
         </div>
         <div class="form-group">
-            <label class="form-label">Tags</label>
+            <label>Tags</label>
             <div class="input-group">
-                <input type="text" class="form-control" v-model="tag">
+                <input type="text" class="form-control" v-model="tag" @keydown.enter.prevent="addTag(tag)">
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" @click="addTag(tag)">Agregar</button>
+                    <button class="btn btn-default" type="button" @click="addTag(tag)">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
                 </span>
             </div>
         </div>
@@ -58,8 +60,10 @@ export default {
     },
     methods: {
         addTag(tag) {
-            this.tagAdded(tag);
-            this.tag = '';
+            if(tag){
+                this.tagAdded(tag);
+                this.tag = '';
+            }
         },
         removeTag(tag) {
             this.tagRemoved(tag);

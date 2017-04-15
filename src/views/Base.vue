@@ -1,17 +1,10 @@
 <template>
     <div class="base-view-component">
-        <div class="row" v-if="user">
-            <div class="col-xs-6">
-                <h5>{{ user.displayName }}</h5>
-            </div>
-            <div class="col-xs-6 text-right">
-                <a class="btn btn-danger" @click.prevent="logout">Logout</a>
-            </div>
-        </div>
+        <main-nav :user="user"></main-nav>
         <div class="row">
             <div class="col-xs-12">
                 <template v-if="loading" class="loading">
-                    <div class="alert alert-warning text-center">Loading...</div>
+                    <div class="text-center alert alert-info">Loading...</div>
                 </template>
                 <template v-else>
                     <router-view></router-view>
@@ -27,6 +20,8 @@ import {
     mapGetters,
     mapActions
 } from 'vuex';
+
+import MainNav from '@/components/MainNav';
 
 export default {
     mounted() {
@@ -44,6 +39,9 @@ export default {
             }
         });
     },
+    components: {
+        MainNav
+    },
     data() {
         return {
             loading: true
@@ -56,7 +54,6 @@ export default {
     },
     methods: {
         ...mapActions({
-            logout: 'logout',
             setUser: 'setUser'
         })
     }

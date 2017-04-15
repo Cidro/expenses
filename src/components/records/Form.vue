@@ -1,7 +1,7 @@
 <template>
     <div class="record-form-component">
         <form @submit.prevent="handleSubmit">
-            <h4>Nuevo Registro</h4>
+            <h4>Agregar Registro</h4>
             <div class="form-group">
                 <label class="form-label">Descripción</label>
                 <input type="text" class="form-control" v-model="record.description">
@@ -10,17 +10,7 @@
                 <label class="form-label">Cantidad</label>
                 <input type="text" class="form-control" :value="record.amount" @input="handleInputAmout" @focus="handleInputAmoutFocus">
             </div>
-            <div class="form-group">
-                <label class="form-label">Tipo</label>
-                <div>
-                    <label class="radio-inline">
-                        <input type="radio" name="isIncome" :value="false" v-model="record.isIncome"> Gasto
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="isIncome" :value="true" v-model="record.isIncome"> Ingreso
-                    </label>
-                </div>
-            </div>
+
             <tags :tags="savedTags" :selected-tags="record.tags" :tag-added="handleTagAdded" :tag-removed="handleTagRemoved"></tags>
             <button class="btn btn-primary btn-block">Guardar</button>
         </form>
